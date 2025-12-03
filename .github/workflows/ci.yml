@@ -29,10 +29,19 @@ jobs:
           allure_report: reports/allure-report
           allure_history: reports/allure-history
 
+      - name: Copy report.html to index.html
+        if: always()
+        run: |
+          if [ -f reports/report.html ]; then
+            cp reports/report.html reports/allure-report/index.html
+          fi
+
       - name: Add fallback index.html
         if: always()
         run: |
-          echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>QA Automation Portfolio</title></head><body><h1>Добро пожаловать!</h1><p>Здесь будут отчёты тестов (pytest + Allure).</p><p>Если отчёт ещё не сгенерирован, вы видите эту заглушку.</p></body></html>' > reports/allure-report/index.html
+          if [ ! -f reports/allure-report/index.html ]; then
+            echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>QA Automation Portfolio</title></head><body><h1>Добро пожаловать!</h1><p>Здесь будут отчёты тестов (pytest + Allure).</p><p>Если отчёт ещё не сгенерирован, вы видите эту заглушку.</p></body></html>' > reports/allure-report/index.html
+          fi
 
       - name: Deploy report to GitHub Pages
         if: always()
