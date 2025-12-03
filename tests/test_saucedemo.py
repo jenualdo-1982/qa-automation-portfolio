@@ -51,7 +51,6 @@ def test_intentional_fail_for_screenshot(driver):
     LoginPage(driver).login("standard_user", "secret_sauce")
     InventoryPage(driver).is_page_opened()
 
-    # Специально падаем — чтобы увидеть скриншот и видео в Allure
     assert False, "Этот тест специально падает — смотрите красивый скриншот и видео!"
 
 
@@ -62,7 +61,6 @@ def test_problem_user_images_broken(driver):
     inventory = InventoryPage(driver)
     assert inventory.is_page_opened()
 
-    # Самый надёжный способ в 2025 году — проверка через naturalWidth
     broken_images = inventory.count_broken_images()
     assert broken_images >= 4, f"Ожидалось хотя бы 4 битые картинки, найдено {broken_images}"
 
