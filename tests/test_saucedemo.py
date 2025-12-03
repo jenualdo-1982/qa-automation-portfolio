@@ -51,7 +51,7 @@ def test_intentional_fail_for_screenshot(driver):
     LoginPage(driver).login("standard_user", "secret_sauce")
     InventoryPage(driver).is_page_opened()
 
-    assert False, "Этот тест специально падает — смотрите красивый скриншот и видео!"
+    assert False, "Этот тест специально падает — смотрите скриншот и видео!"
 
 
 def test_problem_user_images_broken(driver):
